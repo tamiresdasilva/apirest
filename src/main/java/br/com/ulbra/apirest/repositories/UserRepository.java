@@ -44,4 +44,19 @@ public class UserRepository {
 
         list.remove(user);
     }
+
+    public User updateUser(User user, Long id){
+        User filteredUser = list
+                .stream()
+                .filter(item -> Objects.equals(item.getId(), id))
+                .findFirst()
+                .orElseThrow();
+
+        user.setId(filteredUser.getId());
+
+        int index = list.indexOf(filteredUser);
+        list.set(index, user);
+
+        return user;
+    }
 }
